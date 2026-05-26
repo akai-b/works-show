@@ -1,3 +1,46 @@
+# works-show
+
+## 部署到 GitHub Pages
+
+### 一次性配置
+
+1. `vite.config.ts` 配置仓库子路径：
+
+```ts
+export default defineConfig({
+	base: '/works-show/',
+	// ...
+})
+```
+
+2. 仓库内添加工作流文件：`.github/workflows/deploy.yml`
+
+3. 打开 GitHub 仓库：`Settings -> Pages`，`Build and deployment` 选择 **GitHub Actions**
+
+### 发布流程
+
+- 提交并推送到 `main`：
+
+```bash
+git add .
+git commit -m "chore: deploy github pages"
+git push origin main
+```
+
+- 等待 Actions 执行完成后访问：
+
+`https://akai-b.github.io/works-show/`
+
+### 本地验证
+
+```bash
+pnpm install
+pnpm build
+pnpm preview
+```
+
+---
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
