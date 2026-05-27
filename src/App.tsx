@@ -21,12 +21,7 @@ const nameFileMap: Record<string, string> = {
 	'向僵尸开炮 · 一周年活动': 'xjskp-yznhd'
 }
 
-const imageModules = import.meta.glob('./assets/images/*.{png,webp,mp4}', {
-	eager: true,
-	import: 'default'
-}) as Record<string, string>
-
-const findAsset = (fileName: string) => imageModules[`./assets/images/${fileName}`] ?? ''
+const ASSET_BASE_URL = 'https://cdn.docoi.cc/static/activity/'
 
 const ratio = 97 / 211
 
@@ -50,9 +45,9 @@ function App() {
 			Object.entries(nameFileMap).map(([title, file]) => ({
 				title,
 				file,
-				cover: findAsset(`${file}-cover.png`),
-				fallbackCover: findAsset(`${file}.webp`),
-				video: findAsset(`${file}.mp4`)
+				cover: `${ASSET_BASE_URL}${file}-cover.png`,
+				fallbackCover: `${ASSET_BASE_URL}${file}.webp`,
+				video: `${ASSET_BASE_URL}${file}.mp4`
 			})),
 		[]
 	)
@@ -194,13 +189,13 @@ function App() {
 
 	return (
 		<main className="relative min-h-screen overflow-hidden bg-[#05070d] text-white">
-			<div className="mx-auto w-full max-w-[1280px] px-4 pb-14 pt-10 md:px-8 md:pt-14">
+			<div className="mx-auto w-full max-w-[1080px] px-3 pb-14 pt-10 md:px-6 md:pt-14">
 				<header className="mb-8 md:mb-12">
 					<p className="mb-3 text-xs uppercase tracking-[0.24em] text-white/45">Portfolio</p>
 					<h1 className="text-2xl font-semibold tracking-wide md:text-4xl">个人作品展示</h1>
 				</header>
 
-				<section className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-5 lg:grid-cols-4 xl:grid-cols-5">
+				<section className="grid grid-cols-3 gap-2.5 sm:gap-3.5 md:gap-4 lg:grid-cols-4">
 					{works.map((work) => {
 						const isHovered = hoveredFile === work.file
 						const isActive = activeWork?.file === work.file
